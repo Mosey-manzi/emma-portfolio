@@ -9,6 +9,8 @@ import { InstagramIcon } from '@/components/ui/InstagramIcon';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,10 +19,50 @@ export default function ContactPage() {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
+
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    setSending(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Unable to send your message.");
+      }
+
       setSubmitted(true);
+
+      // Optional: clear the form
+      setFormData({
+        name: "",
+        email: "",
+        organization: "",
+        inquiryType: "Choreography Commission",
+        message: "",
+      });
+
+    } catch (err) {
+      console.error(err);
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setSending(false);
     }
   };
 
@@ -220,11 +262,22 @@ export default function ContactPage() {
                   className="w-full bg-[#121215] border border-[rgba(255,255,255,0.1)] rounded-none px-4 py-3 text-sm text-[#f5f4f0] focus:border-[#c8a96e] focus:outline-none transition-colors resize-none"
                 />
               </div>
-
+              {error && (
+                <div className="rounded-sm border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                  {error}
+                </div>
+              )}
               <div className="pt-2">
-                <Button type="submit" variant="gold" size="lg" cursorText="SEND">
-                  <span>Send Message</span>
-                  <Send className="w-4 h-4 ml-1" />
+                <Button
+                  type="submit"
+                  variant="gold"
+                  size="lg"
+                  cursorText={sending ? "SENDING" : "SEND"}
+                  disabled={sending}
+                >
+                  <span>{sending ? "Sending..." : "Send Message"}</span>
+
+                  {!sending && <Send className="w-4 h-4 ml-1" />}
                 </Button>
               </div>
             </form>
