@@ -148,7 +148,7 @@ I was honored to contribute as both assistant choreographer and dancer in Kwibuk
 
 This choreographic work reflects the resilience of a nation — healing wounds, rebuilding trust, and uniting people through art. It embodies the promise of renewal, envisioning a future where every individual has a place, rooted in strength and hope, ensuring that such atrocities will never happen again.`,
     quote: 'Carrying three symbolic gifts: healing, unity, and renewal.',
-    heroImage: '/images/kwibuka30/IMG_3752.JPG',
+    heroImage: '/images/kwibuka30/IMG_3752.jpg',
     gallery: [
       '/images/kwibuka30/IMG_0501.JPG',
       '/images/kwibuka30/IMG_0502.JPG',

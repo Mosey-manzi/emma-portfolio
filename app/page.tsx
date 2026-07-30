@@ -109,7 +109,7 @@ export default function HomePage() {
               >
                 <div className="relative aspect-square w-full rounded-sm overflow-hidden mb-2">
                   <Image
-                    src="/images/kwibuka30/IMG_3752.JPG"
+                    src="/images/kwibuka30/IMG_3752.jpg"
                     alt="Kwibuka 30 Choreography"
                     fill
                     className="object-cover"
