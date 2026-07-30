@@ -138,7 +138,7 @@ Darkness becomes a space of transformation, where breath is rediscovered and lim
       { role: 'Artistic Programming & Coordination', name: 'Didacienne Nibagwire' },
       { role: 'Music', name: 'Herve Twahirwa & Samuel Kamanzi' },
       { role: 'Costume Design', name: 'Cedric Mizero' },
-      { role: 'Assistant Choreographer: ', name: 'Emmanuel Ahimana & 9' }
+      { role: 'Assistant Choreographer: ', name: 'Emmanuel Ahimana + 9 others' }
     ],
     tags: ['Commemorative', 'Mass Ensemble', 'Cultural Memory'],
     summary: 'A monumental choreographic work bringing together 130 dancers in a moving journey from past to future, carrying three symbolic gifts: healing, unity, and renewal.',

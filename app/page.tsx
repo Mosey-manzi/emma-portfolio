@@ -72,8 +72,8 @@ export default function HomePage() {
                   <span className="uppercase tracking-widest text-[10px] text-[#c8a96e]">Years of Experience</span>
                 </div>
                 <div>
-                  <span className="block font-serif text-2xl sm:text-3xl text-[#f5f4f0] font-light">130</span>
-                  <span className="uppercase tracking-widest text-[10px] text-[#c8a96e]">Ensemble Dancers</span>
+                  <span className="block font-serif text-2xl sm:text-3xl text-[#f5f4f0] font-light">100+</span>
+                  <span className="uppercase tracking-widest text-[10px] text-[#c8a96e]">Performances</span>
                 </div>
                 <div>
                   <span className="block font-serif text-2xl sm:text-3xl text-[#f5f4f0] font-light">5</span>
