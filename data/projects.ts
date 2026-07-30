@@ -24,7 +24,7 @@ export interface Project {
   /** Year of premiere or production */
   year: string;
   /** Primary category filter */
-  category?: 'Solo Works' | 'Commemorative' | 'Opera & Collaboration' | 'Residencies';
+  category?: 'Solo Works' | 'Commemorative' | 'Opera & Collaboration' | 'Duet' | 'Residencies';
   /** Core thematic description */
   theme: string;
   /** Venue, festival, or geographic location */
@@ -138,7 +138,7 @@ Darkness becomes a space of transformation, where breath is rediscovered and lim
       { role: 'Artistic Programming & Coordination', name: 'Didacienne Nibagwire' },
       { role: 'Music', name: 'Herve Twahirwa & Samuel Kamanzi' },
       { role: 'Costume Design', name: 'Cedric Mizero' },
-      { role: 'Assistant Choreographer & Dancer', name: 'Emmanuel Ahimana' }
+      { role: 'Assistant Choreographer: ', name: 'Emmanuel Ahimana & 9' }
     ],
     tags: ['Commemorative', 'Mass Ensemble', 'Cultural Memory'],
     summary: 'A monumental choreographic work bringing together 130 dancers in a moving journey from past to future, carrying three symbolic gifts: healing, unity, and renewal.',
@@ -250,7 +250,7 @@ In this perpetual journey toward what is believed to be an exit, stories emerge 
     title: 'MITI MITI',
     subtitle: 'Dance of Resistance & Survival',
     year: '2026',
-    category: 'Solo Works',
+    category: 'Duet',
     theme: 'Rebellion, Survival & Dual Worlds',
     location: 'Congo & Institut Français du Bukavu',
     duration: '30 Minutes',
@@ -321,6 +321,7 @@ This transformative experience allowed the body to embrace rhythm while connecti
     title: 'INGOMANSHYA',
     subtitle: 'Coaching Choreographic Work with Ingomanshya Company',
     year: '2026',
+    category: 'Opera & Collaboration',
     theme: 'Percussive Body Movement & Heritage Revival',
     location: 'Canada -Brazil tour',
     duration: '50 Minutes',

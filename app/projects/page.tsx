@@ -14,7 +14,7 @@ import { TextReveal } from '@/components/animations/TextReveal';
 import { projectsData, Project } from '@/data/projects';
 
 /** Category filter options */
-const categories = ['All', 'Solo Works', 'Commemorative', 'Opera & Collaboration', 'Residencies'] as const;
+const categories = ['All', 'Solo Works', 'Duet', 'Commemorative', 'Opera & Collaboration', 'Residencies'] as const;
 
 export default function ProjectsPage() {
   // Selected category filter state
@@ -70,11 +70,10 @@ export default function ProjectsPage() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               data-cursor={cat.toUpperCase()}
-              className={`px-4 py-2 rounded-full text-xs uppercase tracking-widest transition-all duration-300 ${
-                isActive
+              className={`px-4 py-2 rounded-full text-xs uppercase tracking-widest transition-all duration-300 ${isActive
                   ? 'bg-[#c8a96e] text-[#0b0b0c] font-medium shadow-md'
                   : 'bg-[rgba(255,255,255,0.05)] text-[#9e9a91] hover:text-[#f5f4f0] hover:bg-[rgba(255,255,255,0.1)]'
-              }`}
+                }`}
             >
               {cat} <span className="opacity-60 ml-1 text-[10px]">({count})</span>
             </button>
