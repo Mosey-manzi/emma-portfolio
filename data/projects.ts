@@ -24,7 +24,7 @@ export interface Project {
   /** Year of premiere or production */
   year: string;
   /** Primary category filter */
-  category: 'Solo Works' | 'Commemorative' | 'Opera & Collaboration' | 'Residencies';
+  category?: 'Solo Works' | 'Commemorative' | 'Opera & Collaboration' | 'Residencies';
   /** Core thematic description */
   theme: string;
   /** Venue, festival, or geographic location */
@@ -321,7 +321,6 @@ This transformative experience allowed the body to embrace rhythm while connecti
     title: 'INGOMANSHYA',
     subtitle: 'Coaching Choreographic Work with Ingomanshya Company',
     year: '2026',
-    category: '',
     theme: 'Percussive Body Movement & Heritage Revival',
     location: 'Canada -Brazil tour',
     duration: '50 Minutes',
