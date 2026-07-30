@@ -1,5 +1,11 @@
 'use client';
 
+/**
+ * Portfolio Homepage (`/`)
+ * Features Emmanuel Ahimana's hero intro, artistic manifesto statement,
+ * featured choreographies showcase, core philosophy pillars & call to action.
+ */
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,6 +18,7 @@ import { projectsData } from '@/data/projects';
 import { biographyData } from '@/data/biography';
 
 export default function HomePage() {
+  // Filter projects configured for featured display on Homepage
   const featuredProjects = projectsData.filter((p) => p.featured);
 
   return (
@@ -87,7 +94,7 @@ export default function HomePage() {
               {/* Primary Featured Image: IMG_9966 */}
               <div className="relative rounded-sm overflow-hidden border border-[rgba(200,169,110,0.2)] shadow-2xl">
                 <ImageParallax
-                  src="/images/irebe/IMG_9966.jpg"
+                  src="/images/irebe/IMG_0025.jpg"
                   alt="Emmanuel Ahimana performing IREBE (IMG_9966)"
                   aspectRatio="aspect-[3/4]"
                   priority
@@ -102,14 +109,15 @@ export default function HomePage() {
               >
                 <div className="relative aspect-square w-full rounded-sm overflow-hidden mb-2">
                   <Image
-                    src="/images/kwibuka30/IMG_0500.JPG"
+                    src="/images/kwibuka30/IMG_3752.JPG"
                     alt="Kwibuka 30 Choreography"
                     fill
                     className="object-cover"
                   />
                 </div>
                 <p className="font-serif text-xs text-[#f5f4f0] font-medium truncate">Kwibuka 30</p>
-                <p className="text-[10px] uppercase tracking-widest text-[#c8a96e]">Mass Ensemble</p>
+                <p className="text-[10px] uppercase tracking-widest text-[#c8a96e]">Choreographer & artistic director: <em style={{ color: "white" }}>Wesley Ruzibiza</em></p>
+                <p className="text-[10px] uppercase tracking-widest text-[#c8a96e]">Assistant choreographer: <em style={{ color: "white" }}>Emmanuel Ahimana</em></p>
               </motion.div>
             </motion.div>
           </div>
@@ -181,15 +189,13 @@ export default function HomePage() {
             return (
               <div
                 key={project.id}
-                className={`lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${
-                  isEven ? '' : 'lg:flex-row-reverse'
-                }`}
+                className={`lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${isEven ? '' : 'lg:flex-row-reverse'
+                  }`}
               >
                 {/* Project Image */}
                 <div
-                  className={`lg:col-span-7 ${
-                    isEven ? 'lg:order-1' : 'lg:order-2'
-                  }`}
+                  className={`lg:col-span-7 ${isEven ? 'lg:order-1' : 'lg:order-2'
+                    }`}
                 >
                   <Link href={`/projects/${project.slug}`}>
                     <ImageParallax
@@ -202,9 +208,8 @@ export default function HomePage() {
 
                 {/* Project Details */}
                 <div
-                  className={`lg:col-span-5 space-y-6 ${
-                    isEven ? 'lg:order-2' : 'lg:order-1'
-                  }`}
+                  className={`lg:col-span-5 space-y-6 ${isEven ? 'lg:order-2' : 'lg:order-1'
+                    }`}
                 >
                   <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-[#c8a96e]">
                     <span>{project.year}</span>

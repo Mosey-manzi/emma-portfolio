@@ -1,3 +1,6 @@
+/**
+ * Data model for Emmanuel Ahimana's artistic biography, philosophy pillars & mentors.
+ */
 export interface BiographyData {
   name: string;
   title: string;
@@ -17,6 +20,9 @@ export interface BiographyData {
   quotes: string[];
 }
 
+/**
+ * Artistic Biography Data & Curatorial Manifesto
+ */
 export const biographyData: BiographyData = {
   name: 'Emmanuel Ahimana',
   title: 'Contemporary Choreographer & Professional Dancer',

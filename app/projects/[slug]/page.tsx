@@ -1,29 +1,50 @@
 'use client';
 
+/**
+ * Dynamic Project Detail Page (`/projects/[slug]`)
+ * Displays full choreographic narrative, performance specifications, 
+ * explicit role attribution, creative team credits, image gallery & fullscreen lightbox.
+ */
+
 import React, { useState } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, MapPin, Calendar, Clock, Users, Tag, Sparkles, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MapPin, Calendar, Clock, Users, Tag, Sparkles, X, ChevronLeft, ChevronRight, Maximize2, Camera, Music, Award, UserCheck } from 'lucide-react';
 import { TextReveal } from '@/components/animations/TextReveal';
 import { Button } from '@/components/ui/Button';
 import { projectsData } from '@/data/projects';
+
+/**
+ * Returns an appropriate Lucide icon component based on the credit role title.
+ * Used in the Creative Team & Credits sidebar card.
+ */
+const getCreditIcon = (roleName: string) => {
+  const lower = roleName.toLowerCase();
+  if (lower.includes('photo') || lower.includes('camera')) return <Camera className="w-3.5 h-3.5 text-[#c8a96e]" />;
+  if (lower.includes('music') || lower.includes('singer')) return <Music className="w-3.5 h-3.5 text-[#c8a96e]" />;
+  if (lower.includes('emmanuel') || lower.includes('soloist') || lower.includes('dancer')) return <UserCheck className="w-3.5 h-3.5 text-[#c8a96e]" />;
+  if (lower.includes('choreograph') || lower.includes('artistic')) return <Award className="w-3.5 h-3.5 text-[#c8a96e]" />;
+  return <Sparkles className="w-3.5 h-3.5 text-[#c8a96e]" />;
+};
 
 export default function ProjectDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
 
+  // Retrieve project data by URL slug parameter
   const projectIndex = projectsData.findIndex((p) => p.slug === slug);
   if (projectIndex === -1) {
     notFound();
   }
 
   const project = projectsData[projectIndex];
+  // Calculate previous and next project indices for pagination footer
   const prevProject = projectsData[(projectIndex - 1 + projectsData.length) % projectsData.length];
   const nextProject = projectsData[(projectIndex + 1) % projectsData.length];
 
-  // Lightbox State
+  // Image Lightbox Modal State
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const openLightbox = (idx: number) => setLightboxIndex(idx);
@@ -66,6 +87,14 @@ export default function ProjectDetailPage() {
             <span>{project.year}</span>
             <span>•</span>
             <span>{project.category}</span>
+            {project.role && (
+              <>
+                <span>•</span>
+                <span className="text-[#f5f4f0] font-medium border border-[rgba(200,169,110,0.4)] px-2.5 py-0.5 rounded-full bg-[rgba(200,169,110,0.1)]">
+                  {project.role}
+                </span>
+              </>
+            )}
           </div>
 
           <h1 className="font-serif text-5xl sm:text-7xl font-light text-[#f5f4f0] leading-tight">
@@ -92,7 +121,7 @@ export default function ProjectDetailPage() {
       </section>
 
       {/* METADATA SPECS GRID */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 glass-panel rounded-sm text-xs text-[#9e9a91]">
+      <section className="grid grid-cols-2 md:grid-cols-5 gap-6 p-8 glass-panel rounded-sm text-xs text-[#9e9a91]">
         <div className="space-y-1">
           <div className="flex items-center gap-1.5 text-[#c8a96e] uppercase tracking-wider font-medium">
             <MapPin className="w-3.5 h-3.5" />
@@ -119,11 +148,23 @@ export default function ProjectDetailPage() {
 
         <div className="space-y-1">
           <div className="flex items-center gap-1.5 text-[#c8a96e] uppercase tracking-wider font-medium">
-            <Users className="w-3.5 h-3.5" />
-            <span>Ensemble</span>
+            <UserCheck className="w-3.5 h-3.5" />
+            <span>Emmanuel&apos;s Role</span>
           </div>
-          <p className="text-[#f5f4f0] text-sm truncate">{project.collaborators[0]}</p>
+          <p className="text-[#f5f4f0] text-sm truncate">{project.role || 'Choreographer'}</p>
         </div>
+
+        {project.collaborators?.length ? (
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5 text-[#c8a96e] uppercase tracking-wider font-medium">
+              <Users className="w-3.5 h-3.5" />
+              <span>{project.collaboratorsLabel ?? "Ensemble"}</span>
+            </div>
+            <p className="text-[#f5f4f0] text-sm truncate">
+              {project.collaborators?.[0]}
+            </p>
+          </div>
+        ) : null}
       </section>
 
       {/* NARRATIVE & CONCEPT STORY */}
@@ -151,24 +192,68 @@ export default function ProjectDetailPage() {
           </TextReveal>
         </div>
 
-        {/* Right Collaborators & Tags */}
+        {/* Right Collaborators & Credits */}
         <div className="lg:col-span-4 space-y-8 glass-panel p-8 rounded-sm">
-          <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-[0.25em] text-[#c8a96e] font-semibold flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              <span>Key Collaborators</span>
-            </h3>
-            <ul className="space-y-2 text-xs text-[#f5f4f0]">
-              {project.collaborators.map((collab, idx) => (
-                <li key={idx} className="flex items-center gap-2 border-b border-[rgba(255,255,255,0.05)] pb-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c8a96e]" />
-                  <span>{collab}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Emmanuel's Specific Role Card */}
+          {project.role && (
+            <div className="p-4 rounded border border-[rgba(200,169,110,0.3)] bg-[rgba(200,169,110,0.05)] space-y-1">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#c8a96e] font-semibold block">
+                Emmanuel&apos;s Contribution
+              </span>
+              <p className="text-sm font-medium text-[#f5f4f0] flex items-center gap-2">
+                <UserCheck className="w-4 h-4 text-[#c8a96e] shrink-0" />
+                <span>{project.role}</span>
+              </p>
+            </div>
+          )}
 
-          <div className="space-y-3 pt-4 border-t border-[rgba(255,255,255,0.08)]">
+          {/* Structured Creative Team Credits */}
+          {project.credits && project.credits.length > 0 ? (
+            <div className="space-y-4">
+              <h3 className="text-xs uppercase tracking-[0.25em] text-[#c8a96e] font-semibold flex items-center gap-2 border-b border-[rgba(255,255,255,0.08)] pb-3">
+                <Award className="w-4 h-4" />
+                <span>Creative Team & Credits</span>
+              </h3>
+              <ul className="space-y-3 text-xs">
+                {project.credits.map((credit, idx) => (
+                  <li key={idx} className="flex items-start justify-between gap-3 border-b border-[rgba(255,255,255,0.04)] pb-2.5">
+                    <div className="flex items-center gap-1.5 text-[#9e9a91] font-medium shrink-0">
+                      {getCreditIcon(credit.role)}
+                      <span>{credit.role}:</span>
+                    </div>
+                    <span className="text-[#f5f4f0] font-normal text-right italic">{credit.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <h3 className="text-xs uppercase tracking-[0.25em] text-[#c8a96e] font-semibold flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>Key Collaborators</span>
+              </h3>
+              {project.collaborators?.length ? (
+                <ul className="space-y-2 text-xs text-[#f5f4f0]">
+                  {project.collaborators.map((collab, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-center gap-2 border-b border-[rgba(255,255,255,0.05)] pb-2"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#c8a96e]" />
+                      <span>{collab}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-xs text-[#9e9a91] italic">
+                  No collaborators listed.
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Performance Tags */}
+          <div className="space-y-3 pt-2 border-t border-[rgba(255,255,255,0.08)]">
             <h3 className="text-xs uppercase tracking-[0.25em] text-[#c8a96e] font-semibold flex items-center gap-2">
               <Tag className="w-4 h-4" />
               <span>Performance Tags</span>

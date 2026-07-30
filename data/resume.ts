@@ -1,3 +1,4 @@
+/** Professional experience item definition */
 export interface ExperienceItem {
   period: string;
   role: string;
@@ -7,6 +8,7 @@ export interface ExperienceItem {
   highlights?: string[];
 }
 
+/** Masterclass & international workshop fellowship definition */
 export interface WorkshopItem {
   period: string;
   title: string;
@@ -15,6 +17,9 @@ export interface WorkshopItem {
   location: string;
 }
 
+/**
+ * Data model for Curriculum Vitae (CV) experience timeline & skills.
+ */
 export interface ResumeData {
   contactInfo: {
     name: string;
@@ -41,6 +46,9 @@ export interface ResumeData {
   languages: string[];
 }
 
+/**
+ * Emmanuel Ahimana Curriculum Vitae & Experience Timeline Data
+ */
 export const resumeData: ResumeData = {
   contactInfo: {
     name: 'Emmanuel Ahimana',

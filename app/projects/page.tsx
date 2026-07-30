@@ -1,5 +1,10 @@
 'use client';
 
+/**
+ * Choreographic Repertoire Showcase Page (`/projects`)
+ * Renders all projects with category filter tabs and asymmetric responsive grid.
+ */
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,11 +13,14 @@ import { ImageParallax } from '@/components/animations/ImageParallax';
 import { TextReveal } from '@/components/animations/TextReveal';
 import { projectsData, Project } from '@/data/projects';
 
+/** Category filter options */
 const categories = ['All', 'Solo Works', 'Commemorative', 'Opera & Collaboration', 'Residencies'] as const;
 
 export default function ProjectsPage() {
+  // Selected category filter state
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
+  // Filter projects by category selection
   const filteredProjects = activeCategory === 'All'
     ? projectsData
     : projectsData.filter((p) => p.category === activeCategory);
@@ -105,8 +113,13 @@ export default function ProjectsPage() {
                   </Link>
 
                   <div className="space-y-3 pt-2">
-                    <div className="flex items-center justify-between text-xs uppercase tracking-widest text-[#c8a96e]">
+                    <div className="flex flex-wrap items-center justify-between text-xs uppercase tracking-widest text-[#c8a96e] gap-2">
                       <span>{project.year}</span>
+                      {project.role && (
+                        <span className="text-[10px] text-[#f5f4f0] font-normal border border-[rgba(200,169,110,0.3)] px-2 py-0.5 rounded-full bg-[rgba(200,169,110,0.08)]">
+                          Role: {project.role}
+                        </span>
+                      )}
                       <span>{project.location}</span>
                     </div>
 

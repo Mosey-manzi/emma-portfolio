@@ -1,23 +1,63 @@
+/**
+ * Represents an individual creative team attribution credit.
+ * Used for transparent collaborator recognition across all portfolio projects.
+ */
+export interface ProjectCredit {
+  /** The specific role (e.g., 'Photo', 'Music', 'Choreographer', 'Costume Design') */
+  role: string;
+  /** The credited individual or entity name */
+  name: string;
+}
+
+/**
+ * Main project data model for Emmanuel Ahimana's choreographic portfolio.
+ */
 export interface Project {
+  /** Unique project identifier */
   id: string;
+  /** URL slug for dynamic project routing (/projects/[slug]) */
   slug: string;
+  /** Primary title of the choreographic piece */
   title: string;
+  /** Subtitle or short tagline */
   subtitle: string;
+  /** Year of premiere or production */
   year: string;
+  /** Primary category filter */
   category: 'Solo Works' | 'Commemorative' | 'Opera & Collaboration' | 'Residencies';
+  /** Core thematic description */
   theme: string;
+  /** Venue, festival, or geographic location */
   location: string;
+  /** Duration of performance */
   duration: string;
-  collaborators: string[];
+  /** List of main key collaborators or ensemble groups */
+  collaboratorsLabel?: string;
+  collaborators?: string[];
+  /** Emmanuel Ahimana's explicit role (e.g., 'Assistant Choreographer & Dancer', 'Soloist & Choreographer') */
+  role?: string;
+  /** Full structured team attribution credits list */
+  credits?: ProjectCredit[];
+  /** Tags for performance style and composition */
   tags: string[];
+  /** Short summary snippet for project cards */
   summary: string;
+  /** Full choreographic concept narrative */
   concept: string;
+  /** Featured artistic quote */
   quote?: string;
+  /** Absolute URL path to primary cover image */
   heroImage: string;
+  /** Array of absolute URL paths for image gallery */
   gallery: string[];
+  /** Whether piece is featured on the Homepage */
   featured: boolean;
 }
 
+/**
+ * Choreographic Repertoire Registry
+ * Contains all performance data, concept narratives, and team attributions.
+ */
 export const projectsData: Project[] = [
   {
     id: '1',
@@ -29,7 +69,16 @@ export const projectsData: Project[] = [
     theme: 'Resilience, Inner Spark & Transformation',
     location: 'Kenya National Theatre, Nairobi',
     duration: '25 Minutes',
-    collaborators: ['Dance Life Festival Kenya', 'Emmanuel Ahimana (Soloist)'],
+    collaboratorsLabel: "Choreographer",
+    collaborators: ['Emmanuel Ahimana (Soloist)'],
+    role: 'Soloist & Choreographer',
+    credits: [
+      { role: 'Photo', name: 'in.nairobi' },
+      { role: 'Festival', name: 'Dance Life Festival' },
+      { role: 'Coaching', name: 'Amizero Dance Company' },
+      { role: 'Music', name: 'Kiwe Music' },
+      { role: 'Soloist & Choreographer', name: 'Emmanuel Ahimana' }
+    ],
     tags: ['Solo Piece', 'Contemporary Dance', 'Festival Premiere'],
     summary: 'Beneath the surface, a body listens. Buried in silence, something flickers — a fragile light waiting to emerge between fear and desire.',
     concept: `Beneath the surface, a body listens. Buried in silence, something flickers a fragile light waiting to emerge. Between fear and desire, the body descends, confronts, resists.
@@ -81,7 +130,16 @@ Darkness becomes a space of transformation, where breath is rediscovered and lim
     theme: 'Healing, Unity, Renewal & National Resilience',
     location: 'BK Arena & Kigali Amphitheatre, Rwanda',
     duration: '45 Minutes',
-    collaborators: ['Wesley Ruzibiza (Lead Choreographer)', 'Emmanuel Ahimana (Assistant Choreographer & Dancer)', '130 Ensemble Dancers'],
+    collaboratorsLabel: "Lead Choreographer",
+    collaborators: ['Wesley Ruzibiza'],
+    role: 'Assistant Choreographer & Dancer',
+    credits: [
+      { role: 'Choreographer & Artistic Direction', name: 'Wesley Ruzibiza' },
+      { role: 'Artistic Programming & Coordination', name: 'Didacienne Nibagwire' },
+      { role: 'Music', name: 'Herve Twahirwa & Samuel Kamanzi' },
+      { role: 'Costume Design', name: 'Cedric Mizero' },
+      { role: 'Assistant Choreographer & Dancer', name: 'Emmanuel Ahimana' }
+    ],
     tags: ['Commemorative', 'Mass Ensemble', 'Cultural Memory'],
     summary: 'A monumental choreographic work bringing together 130 dancers in a moving journey from past to future, carrying three symbolic gifts: healing, unity, and renewal.',
     concept: `Kwibuka 30 — Genocide against Tutsi commemoration: The Gift of Time
@@ -110,9 +168,17 @@ This choreographic work reflects the resilience of a nation — healing wounds, 
     year: '2026',
     category: 'Opera & Collaboration',
     theme: 'Cross-Border Storytelling, Love & Social Tension',
-    location: 'Kigali, Rwanda & Goma, DRC',
+    location: 'Kigali - Institut Français du Rwanda',
     duration: '60 Minutes',
-    collaborators: ['Compagnie STEIN-LEIN-CHEN', 'OPERA KIVU', 'Congolese & Rwandan Ensemble'],
+    collaboratorsLabel: "",
+    collaborators: [],
+    role: 'Choreographer & Performer',
+    credits: [
+      { role: 'Photo', name: 'Thomas Freteur' },
+      { role: 'Music', name: 'Mariska Le Moing & Lucia Zarcone' },
+      { role: 'Singers', name: 'Opera du Kivu' },
+      { role: 'Choreography & Performance', name: 'Emmanuel Ahimana' }
+    ],
     tags: ['Opera Fusion', 'International Collaboration', 'Cross-Border'],
     summary: 'A choreographic creation inspired by Mozart’s Le Nozze di Figaro, celebrating cross-border unity and storytelling through classical and contemporary African movement.',
     concept: `During the residency in Rwanda, I had the privilege of choreographing and performing in Les Noces de Suzanne, a production inspired by Mozart’s Le Nozze di Figaro. 
@@ -144,7 +210,17 @@ This project embodied a profound celebration of artistry, collaboration, and sto
     theme: 'Solitude, Support, Collective Memory & Traumatic Healing',
     location: 'Muda Africa (Tanzania) & Kigali Triennial (Rwanda)',
     duration: '40 Minutes',
-    collaborators: ['Amizero Dance Company', 'Wesley Ruzibiza', 'Muda Africa'],
+    collaboratorsLabel: "Choreographer",
+    collaborators: ['Wesley Ruzibiza'],
+    role: 'Dancer / Performer',
+    credits: [
+      { role: 'Production', name: 'Amizero Dance Company' },
+      { role: 'Choreographer', name: 'Wesley Ruzibiza' },
+      { role: 'Photo', name: 'Eye Films' },
+      { role: 'Light Design', name: 'Ari' },
+      { role: 'Music', name: 'Olivier Tarpaga' },
+      { role: 'Peformers', name: 'Emmanuel Ahimana - Diana Odhiambo -\n Haloback Kabango -\n Kateregga Umar Nafi' }
+    ],
     tags: ['Residency', 'East Africa Tour', 'Physical Theatre'],
     summary: 'Exploring the perpetual journey forward through themes of connection, solitude, loss, and mutual support between the individual and the group.',
     concept: `Around the themes of connection, solitude, support, loss, and trauma, Multitude explores the human experience of continually moving forward, no matter the challenges faced. 
@@ -176,9 +252,16 @@ In this perpetual journey toward what is believed to be an exit, stories emerge 
     year: '2026',
     category: 'Solo Works',
     theme: 'Rebellion, Survival & Dual Worlds',
-    location: 'Congo & Rwanda Cross-Cultural Platform',
+    location: 'Congo & Institut Français du Bukavu',
     duration: '30 Minutes',
-    collaborators: ['Congo Residency Team', 'Emmanuel Ahimana'],
+    collaboratorsLabel: "Ensemble",
+    collaborators: ['Emmanuel.A & Haloback.K', 'Emmanuel Ahimana'],
+    role: 'Choreographer & Performer',
+    credits: [
+      { role: 'Ensemble: ', name: 'Emmanuel Ahimana & Haloback Kabango' },
+      { role: 'Residency Host', name: 'Mot\'Art' },
+      { role: 'Choreographer', name: 'Emmanuel & Haloback' },
+    ],
     tags: ['Physical Resistance', 'Duet / Solo', 'Raw Kinetic Force'],
     summary: 'A fierce dance of resistance depicting the intense struggle between art and survival, asking whether existence itself demands constant battle.',
     concept: `Miti Miti is a dance of resistance and survival, portraying rebellion and ferocity between two worlds — art and everyday life. It unfolds as an intense competition between two beings bound by love yet driven by the need to endure within a landscape of chaos and creation. 
@@ -211,7 +294,14 @@ At its heart lies the struggle to meet basic needs, raising the question of whet
     theme: 'Rhythm as Dialogue, African Contemporary Lineage',
     location: 'Toubab Dialaw, Sénégal',
     duration: '1 Month Immersion',
+    collaboratorsLabel: "Ensemble",
     collaborators: ['École des Sables', 'Germaine Acogny Technique Center', 'International Masters'],
+    role: 'Participant / Resident Artist',
+    credits: [
+      { role: 'Institution', name: 'École des Sables (Sénégal)' },
+      { role: 'Technique Masters', name: 'Germaine Acogny Technique Center' },
+      { role: 'Participant', name: 'Emmanuel Ahimana' }
+    ],
     tags: ['Sénégal Immersion', 'Acogny Technique', 'African Diaspora Movement'],
     summary: 'Transformative international internship at the legendary École des Sables, cultivating physical movement as a spiritual dialogue with emotion.',
     concept: `It has been an honour to participate in an international professional internship at École des Sables in Sénégal, a world-renowned centre for dance and cultural exchange. 
@@ -229,21 +319,26 @@ This transformative experience allowed the body to embrace rhythm while connecti
     id: '7',
     slug: 'ingomanshya',
     title: 'INGOMANSHYA',
-    subtitle: 'Touring Choreographic Work with Ingomanshya Company',
+    subtitle: 'Coaching Choreographic Work with Ingomanshya Company',
     year: '2026',
-    category: 'Opera & Collaboration',
+    category: '',
     theme: 'Percussive Body Movement & Heritage Revival',
-    location: 'Kigali & East African Tour',
+    location: 'Canada -Brazil tour',
     duration: '50 Minutes',
-    collaborators: ['Ingomanshya Company', 'Emmanuel Ahimana (Choreographer)'],
+    collaboratorsLabel: "Ensemble",
+    collaborators: ['Ingomanshya Company', 'Emmanuel Ahimana (Coaching)'],
+    role: 'Coaching',
+    credits: [
+      { role: 'Production', name: 'Ingomanshya Company' },
+      { role: 'Coaching', name: 'Emmanuel Ahimana & Kwizera Samuel' }
+    ],
     tags: ['Touring Production', 'Company Choreography', 'Percussive Dance'],
     summary: 'Choreographed for Ingomanshya Company, blending deep Rwandan traditional drum rhythms with contemporary spatial exploration.',
     concept: `Ingomanshya represents an extraordinary synthesis of traditional drum heritage and modern contemporary choreographic vocabulary. Choreographed by Emmanuel Ahimana for Ingomanshya Company's flagship touring production in 2026, the piece explores how ancestral heartbeat translates into bodily resistance and forward momentum.`,
     quote: 'Translating ancestral heartbeat into bodily resistance and forward momentum.',
-    heroImage: '/images/kwibuka30/IMG_0505.JPG',
+    heroImage: '/images/ingomanshya/IMG_0532.JPG',
     gallery: [
-      '/images/kwibuka30/IMG_0504.JPG',
-      '/images/kwibuka30/IMG_0506.JPG'
+      '/images/ingomanshya/IMG_0532.JPG'
     ],
     featured: false
   }

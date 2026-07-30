@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Emmanuel Ahimana' }],
   openGraph: {
     title: 'Emmanuel Ahimana — Contemporary Choreographer',
-    description: 'Award-winning contemporary dance choreography, solos, mass ensembles, and cross-border collaborations based in Kigali, Rwanda.',
+    description: 'Contemporary dance choreography, solos, mass ensembles, and cross-border collaborations based in Kigali, Rwanda.',
     url: 'https://emmanuelahimana.com',
     siteName: 'Emmanuel Ahimana Choreography',
     locale: 'en_US',

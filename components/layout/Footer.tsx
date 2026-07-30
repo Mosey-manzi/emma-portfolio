@@ -121,7 +121,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#68645d]">
-          <p>&copy; 2026 Emmanuel Ahimana. All rights reserved. Award-Winning Choreographer Portfolio.</p>
+          <p>&copy; 2026 Emmanuel Ahimana. All rights reserved.</p>
           <motion.button
             whileHover={{ y: -3 }}
             onClick={scrollToTop}
